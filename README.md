@@ -12,7 +12,7 @@ Un temporizador web liviano, moderno e independiente construido exclusivamente c
 * **Diseño Dark Mode:** Interfaz minimalista y responsiva adaptada para evitar el agotamiento visual.
 * **Zero Dependencias:** Un único archivo `index.html` listo para ejecutar sin necesidad de instalación o servidor.
 
----![alt text](image.png)
+---![alt text](image-1.png)
 
 ## 🛠️ Tecnologías Utilizadas
 
@@ -23,7 +23,7 @@ Un temporizador web liviano, moderno e independiente construido exclusivamente c
   * `Web Audio API` (`AudioContext`, `OscillatorNode`, `GainNode`) para la síntesis de audio.
   * `Notification API` para los avisos del sistema.💪🏻
 
----
+---![alt text](image-2.png)
 
 ## 💻 Instrucciones de Uso
 
