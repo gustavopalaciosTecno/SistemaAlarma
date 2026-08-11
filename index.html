@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Temporizador de 20 Minutos</title>
-  <link rel="stylesheet" href="styles.css">
-  </head>
+ <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="img/alarma-3d.png">
+</head>
 <body>
 
   <div class="card">
@@ -37,7 +38,6 @@
     const pauseBtn = document.getElementById('pauseBtn');
     const stopBtn = document.getElementById('stopBtn');
 
-    // Permiso para notificaciones nativas del sistema
     function requestNotificationPermission() {
       if ("Notification" in window && Notification.permission !== "granted") {
         Notification.requestPermission();
@@ -53,26 +53,35 @@
       }
     }
 
-    // Sonido de pitido sintetizado
-    function playBeep() {
+    // Melodía suave tipo xilófono/campanada (Web Audio API)
+    function playChime() {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
+      const notes = [523.25, 659.25, 783.99, 1046.50]; // Frecuencias Do, Mi, Sol, Do (C5-C6)
 
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      notes.forEach((freq, index) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
 
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
 
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.5);
+        const startTime = audioCtx.currentTime + (index * 0.12); // Desfase entre notas
+        gain.gain.setValueAtTime(0, startTime);
+        gain.gain.linearRampToValueAtTime(0.2, startTime + 0.03); // Ataque suave
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 1.2); // Desvanecimiento natural
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + 1.2);
+      });
     }
 
     function startAlarmSound() {
-      playBeep();
-      alarmInterval = setInterval(playBeep, 1000);
+      playChime();
+      // Repite la campanada cada 2.5 segundos
+      alarmInterval = setInterval(playChime, 2500);
     }
 
     function updateDisplay(seconds) {
