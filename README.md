@@ -10,7 +10,7 @@ Un temporizador web liviano, moderno e independiente construido exclusivamente c
 * **Notificaciones de Escritorio:** Alerta flotante nativa del sistema operativo mediante la **Notification API** al finalizar el tiempo (funciona incluso con el navegador minimizado o en otra pestaña).
 * **Controles Integrados:** Botones para **Iniciar**, **Pausar / Reanudar** y **Detener**.
 * **Diseño Dark Mode:** Interfaz minimalista y responsiva adaptada para evitar el agotamiento visual.
-* **Zero Dependencias:** Un único archivo `index.html` listo para ejecutar sin necesidad de instalación o servidor.
+* **Dos archivos:** Los únicos dos archivos `index.html` y `styles.css` listos para  usarlos sin necesidad de instalación o servidor.
 
 ---![alt text](image-1.png)
 
